@@ -1,0 +1,48 @@
+QT       += core gui
+
+greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
+
+CONFIG += c++11
+
+# You can make your code fail to compile if it uses deprecated APIs.
+# In order to do so, uncomment the following line.
+#DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
+
+SOURCES += \
+    displaywidget.cpp \
+    examinewidget.cpp \
+    interface.cpp \
+    main.cpp \
+    mainwidget.cpp \
+    searchingresult.cpp \
+    searchingwidget.cpp \
+    word.cpp \
+    wordlist.cpp \
+    wordpriorityqueue.cpp
+
+HEADERS += \
+    displaywidget.h \
+    examinewidget.h \
+    interface.h \
+    mainwidget.h \
+    searchingresult.h \
+    searchingwidget.h \
+    word.h \
+    wordlist.h \
+    wordpriorityqueue.h
+
+FORMS += \
+    displaywidget.ui \
+    examinewidget.ui \
+    interface.ui \
+    mainwidget.ui \
+    searchingresult.ui \
+    searchingwidget.ui
+
+TRANSLATIONS += \
+    LanguageLearner_zh_CN.ts
+
+# Default rules for deployment.
+qnx: target.path = /tmp/$${TARGET}/bin
+else: unix:!android: target.path = /opt/$${TARGET}/bin
+!isEmpty(target.path): INSTALLS += target

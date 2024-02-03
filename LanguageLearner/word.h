@@ -8,20 +8,22 @@ class Word
 {
 public:
 	Word();
-	bool countProperty(QString key);
-	bool addProperty(QString key,QString value);
-	bool editProperty(QString key,QString value);
-	bool deleteProperty(QString key);
-	QString viewProperty(QString key);
+	bool countProperty(QString _key_);
+	bool addProperty(QString _key_,QString _value_);
+	bool editProperty(QString _key_,QString value_);
+	bool deleteProperty(QString _key_);
+
+	QString word();
+	QString property(QString _property_);
 
 	QString save();
-	void load(QString str);
+	void load(QString _str_);
 
-	bool operator < (Word &word_) const {return word<word_.word;}
+	bool operator < (Word &_word_) const {return word_<_word_.word_;}
 
 private:
-	QString word;
-	QMap<QString,QString> properties;
+	QString word_;
+	QMap<QString,QString> properties_;
 };
 
 #endif // WORD_H

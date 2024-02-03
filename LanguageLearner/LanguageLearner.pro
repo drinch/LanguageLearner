@@ -17,8 +17,7 @@ SOURCES += \
     searchingresult.cpp \
     searchingwidget.cpp \
     word.cpp \
-    wordlist.cpp \
-    wordpriorityqueue.cpp
+    wordlist.cpp
 
 HEADERS += \
     displaywidget.h \
@@ -28,8 +27,7 @@ HEADERS += \
     searchingresult.h \
     searchingwidget.h \
     word.h \
-    wordlist.h \
-    wordpriorityqueue.h
+    wordlist.h
 
 FORMS += \
     displaywidget.ui \

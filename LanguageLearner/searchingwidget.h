@@ -17,6 +17,10 @@ public:
 
 private:
 	Ui::SearchingWidget *ui;
+
+signals:
+	void addWord();
+	void search(QString _str_);
 };
 
 #endif // SEARCHINGWIDGET_H

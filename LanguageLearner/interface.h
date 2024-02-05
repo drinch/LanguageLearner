@@ -17,6 +17,9 @@ public:
 
 private:
 	Ui::Interface *ui;
+
+signals:
+    void examine(int _type_,int _number_);
 };
 
 #endif // INTERFACE_H

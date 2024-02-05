@@ -32,7 +32,7 @@
    <item>
     <widget class="QStackedWidget" name="MainStackedWidget_">
      <property name="currentIndex">
-      <number>0</number>
+      <number>2</number>
      </property>
      <widget class="QWidget" name="Page1_">
       <layout class="QVBoxLayout" name="verticalLayout_2">
@@ -159,7 +159,7 @@
         <number>0</number>
        </property>
        <item>
-        <widget class="DisplayWidget" name="widget" native="true"/>
+        <widget class="DisplayWidget" name="DisplayWidget_" native="true"/>
        </item>
       </layout>
      </widget>
@@ -181,7 +181,7 @@
         <number>0</number>
        </property>
        <item>
-        <widget class="ExamineWidget" name="widget_2" native="true"/>
+        <widget class="ExamineWidget" name="ExamineWidget_" native="true"/>
        </item>
       </layout>
      </widget>

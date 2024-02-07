@@ -19,14 +19,16 @@ public:
 
     void setMode(int _mode_);
     void setWord(Word* _word_);
-    void editWord();
+    void saveWord();
 
 private:
 	Ui::DisplayWidget *ui;
     Word* word_;
     bool editmode_;
+    QWidget* title_;
+    QVector<QWidget*> properties_;
 
-    void displayWord();
+    void showWord();
 
 signals:
     void back();

@@ -17,6 +17,7 @@ SOURCES += \
     searchingresult.cpp \
     searchingwidget.cpp \
     word.cpp \
+    wordbox.cpp \
     wordlist.cpp
 
 HEADERS += \
@@ -27,6 +28,7 @@ HEADERS += \
     searchingresult.h \
     searchingwidget.h \
     word.h \
+    wordbox.h \
     wordlist.h
 
 FORMS += \
@@ -35,7 +37,8 @@ FORMS += \
     interface.ui \
     mainwidget.ui \
     searchingresult.ui \
-    searchingwidget.ui
+    searchingwidget.ui \
+    wordbox.ui
 
 TRANSLATIONS += \
     LanguageLearner_zh_CN.ts

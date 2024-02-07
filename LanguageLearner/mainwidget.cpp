@@ -7,30 +7,18 @@ MainWidget::MainWidget(QWidget *parent)
 {
     ui->setupUi(this);
 
-    connect(ui->Interface_,&Interface::examine,
-            [=](){
-        mainSwitch(3);
-    });
-    connect(ui->ExamineWidget_,&ExamineWidget::end,
-            [=](){
-        mainSwitch(1);
-    });
-    connect(ui->SearchingWidget_,&SearchingWidget::search,
-            [=](QString _str_){
-        interfaceSwitch(_str_==""?1:2);
-    });
-    connect(ui->SearchingResult_,&SearchingResult::check,
-            [=](){
-        mainSwitch(2);
-    });
-    connect(ui->DisplayWidget_,&DisplayWidget::back,
-            [=](){
-        mainSwitch(1);
-    });
+    resize(600,400);
+    mainSwitch(0);
+    interfaceSwitch(0);
+
+    connect(ui->Interface_,&Interface::examine,[=](){mainSwitch(2);});
+    connect(ui->ExamineWidget_,&ExamineWidget::end,[=](){mainSwitch(0);});
+    connect(ui->SearchingWidget_,&SearchingWidget::search,[=](QString _str_){interfaceSwitch(_str_==""?0:1);});
+    connect(ui->SearchingResult_,&SearchingResult::check,[=](){mainSwitch(1);});
+    connect(ui->DisplayWidget_,&DisplayWidget::back,[=](){mainSwitch(0);});
+    connect(ui->SearchingWidget_,&SearchingWidget::addWord,[=](){mainSwitch(1);});
     connect(ui->SearchingWidget_,&SearchingWidget::addWord,
-            [=](){
-        mainSwitch(2);
-    });
+            [=](){ui->DisplayWidget_->setMode(1);ui->DisplayWidget_->setWord(new Word());});
 }
 
 MainWidget::~MainWidget()
@@ -39,10 +27,10 @@ MainWidget::~MainWidget()
 }
 
 void MainWidget::mainSwitch(int _index_){
-	if(_index_<1||_index_>3) return;
+    if(_index_<0||_index_>=3) return;
 	ui->MainStackedWidget_->setCurrentIndex(_index_);
 }
 void MainWidget::interfaceSwitch(int _index_){
-	if(_index_<1||_index_>2) return;
+    if(_index_<0||_index_>=2) return;
 	ui->StackedWidget_->setCurrentIndex(_index_);
 }

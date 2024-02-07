@@ -6,6 +6,7 @@ SearchingWidget::SearchingWidget(QWidget *parent) :
 	ui(new Ui::SearchingWidget)
 {
 	ui->setupUi(this);
+    connect(ui->AddWord_,&QPushButton::clicked,[=](){addWord();});
 }
 
 SearchingWidget::~SearchingWidget()

@@ -31,6 +31,9 @@ QString Word::property(QString _property_){
 	if(!properties_.count(_property_)) return "";
 	else return properties_[_property_];
 }
+int Word::propertyNumber(){
+    return properties_.size();
+}
 
 QString Word::save(){}
 void Word::load(QString _str_){}

@@ -15,6 +15,7 @@ public:
 
 	QString word();
 	QString property(QString _property_);
+    int propertyNumber();
 
 	QString save();
 	void load(QString _str_);

@@ -18,7 +18,10 @@ MainWidget::MainWidget(QWidget *parent)
     connect(ui->DisplayWidget_,&DisplayWidget::back,[=](){mainSwitch(0);});
     connect(ui->SearchingWidget_,&SearchingWidget::addWord,[=](){mainSwitch(1);});
     connect(ui->SearchingWidget_,&SearchingWidget::addWord,
-            [=](){ui->DisplayWidget_->setMode(1);ui->DisplayWidget_->setWord(new Word());});
+            [=](){
+        ui->DisplayWidget_->setWord(new Word());
+        ui->DisplayWidget_->setMode(1);
+    });
 }
 
 MainWidget::~MainWidget()

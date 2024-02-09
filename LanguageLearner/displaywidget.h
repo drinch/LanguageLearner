@@ -2,6 +2,8 @@
 #define DISPLAYWIDGET_H
 
 #include<QWidget>
+#include<QLineEdit>
+#include<QPushButton>
 
 #include"word.h"
 
@@ -17,21 +19,26 @@ public:
 	explicit DisplayWidget(QWidget *parent = nullptr);
 	~DisplayWidget();
 
-    void setMode(int _mode_);
     void setWord(Word* _word_);
-    void saveWord();
+    void setMode(int _mode_);
 
 private:
 	Ui::DisplayWidget *ui;
-    Word* word_;
     bool editmode_;
-    QWidget* title_;
-    QVector<QWidget*> properties_;
+    Word *word_,*wordcopy_;
+    QVector<QLineEdit*> interface_;
+    QVector<QPushButton*> button_;
+    QVector<QString> properties_;
 
-    void showWord();
+    void createInterface();
+    void setInterface();
+    void deleteInterface();
+    void addProperty(QString _key_,QString _value_);
+    void deleteProperty(int _index_);
 
 signals:
     void back();
+    void save();
 };
 
 #endif // DISPLAYWIDGET_H

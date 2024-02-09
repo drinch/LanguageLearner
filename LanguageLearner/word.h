@@ -8,13 +8,16 @@ class Word
 {
 public:
 	Word();
+    Word(const Word &_word_);
+    void setWord(QString _str_);
 	bool countProperty(QString _key_);
 	bool addProperty(QString _key_,QString _value_);
 	bool editProperty(QString _key_,QString value_);
 	bool deleteProperty(QString _key_);
 
 	QString word();
-	QString property(QString _property_);
+    QString property(QString _property_);
+    QList<QString> properties();
     int propertyNumber();
 
 	QString save();
@@ -22,8 +25,8 @@ public:
 
 	bool operator < (Word &_word_) const {return word_<_word_.word_;}
 
+    QString word_;
 private:
-	QString word_;
 	QMap<QString,QString> properties_;
 };
 

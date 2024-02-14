@@ -14,13 +14,17 @@ class WordBox : public QWidget
     Q_OBJECT
 
 public:
-    explicit WordBox(QWidget *parent = nullptr);
+    explicit WordBox(QWidget *parent = nullptr,int _width_=0);
     ~WordBox();
-    void setWord(QString* _word_);
+
+    void setWord(const Word* _word_);
+    void setPlace(int _i_);
+    void showWord();
 
 private:
     Ui::WordBox *ui;
-    Word* word_;
+    const Word* word_;
+    int place_;
 };
 
 #endif // WORDBOX_H

@@ -33,12 +33,13 @@ private:
     void createInterface();
     void setInterface();
     void deleteInterface();
+
     void addProperty(QString _key_,QString _value_);
     void deleteProperty(int _index_);
 
 signals:
     void back();
-    void save();
+    void save(QString _word_);
 };
 
 #endif // DISPLAYWIDGET_H

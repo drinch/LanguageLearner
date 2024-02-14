@@ -3,7 +3,6 @@
 
 #include<QLabel>
 #include<QLineEdit>
-#include<QDebug>
 
 DisplayWidget::DisplayWidget(QWidget *parent) :
 	QWidget(parent),
@@ -24,20 +23,19 @@ DisplayWidget::DisplayWidget(QWidget *parent) :
         if(!editmode_){
             wordcopy_=new Word(*word_);
         }else{
+            QString wordstr=wordcopy_->word();
             wordcopy_->setWord(interface_[0]->text());
-            //wordcopy_->word_=interface_[0]->text();
             for(int i=0;i<properties_.size();i++){
                 if(wordcopy_->countProperty(properties_[i])){
                     wordcopy_->deleteProperty(properties_[i]);
                 }
             }
-            qDebug()<<"a";
             for(int i=1;i<interface_.size()/2;i++){
                 if(!wordcopy_->countProperty(interface_[i*2]->text()))
                     wordcopy_->addProperty(interface_[i*2]->text(),interface_[i*2+1]->text());
                 else wordcopy_->editProperty(interface_[i*2]->text(),interface_[i*2+1]->text());
             }
-            save();
+            save(wordstr);
             word_=wordcopy_;
             wordcopy_=nullptr;
         }
@@ -60,7 +58,10 @@ void DisplayWidget::setWord(Word* _word_){
     }
 }
 void DisplayWidget::setMode(int _mode_){
-    if(_mode_!=0) editmode_=1;
+    if(_mode_!=0) {
+        editmode_=1;
+        wordcopy_=new Word(*word_);
+    }
     else editmode_=0;
     if(word_==nullptr) return;
     setInterface();
@@ -122,6 +123,7 @@ void DisplayWidget::deleteInterface(){
     button_.clear();
     ui->MainWidget_->setMinimumHeight(0);
 }
+
 void DisplayWidget::addProperty(QString _key_,QString _value_){
     int i=interface_.size()/2,x=interface_[1]->x(),y=interface_[1]->y();
     interface_.append(new QLineEdit(_key_,ui->MainWidget_));

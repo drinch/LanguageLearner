@@ -7,27 +7,29 @@
 class Word
 {
 public:
-	Word();
-    Word(const Word &_word_);
-    void setWord(QString _str_);
-	bool countProperty(QString _key_);
-	bool addProperty(QString _key_,QString _value_);
-	bool editProperty(QString _key_,QString value_);
-	bool deleteProperty(QString _key_);
+    Word();
+    ~Word();
 
-	QString word();
-    QString property(QString _property_);
-    QList<QString> properties();
+    QString word();
+    void setWord(QString _str_);
+
     int propertyNumber();
+    QString property(QString _key_);
+    QList<QString> properties();
+    void addProperty(QString _key_,QString _value_);
+    void editProperty(QString _key_,QString value_);
+    int deleteProperty(QString _key_);
+    int countProperty(QString _key_);
+
 
 	QString save();
 	void load(QString _str_);
 
 	bool operator < (Word &_word_) const {return word_<_word_.word_;}
 
-    QString word_;
 private:
-	QMap<QString,QString> properties_;
+    QString word_;
+    QMap<QString,QString> properties_;
 };
 
 #endif // WORD_H

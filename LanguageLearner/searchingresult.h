@@ -14,12 +14,13 @@ class SearchingResult : public QWidget
 
 public:
 	explicit SearchingResult(QWidget *parent = nullptr);
-	~SearchingResult();
-    void displayWordList();
+    ~SearchingResult();
+
+    void setWordList(QList<QString> _list_);
 
 private:
 	Ui::SearchingResult *ui;
-    QVector<QString> wordlist_;
+    QList<QString> wordlist_;
 
 signals:
     void check(QString _word_);

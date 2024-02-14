@@ -12,3 +12,7 @@ SearchingResult::~SearchingResult()
 {
 	delete ui;
 }
+
+void SearchingResult::setWordList(QList<QString> _list_){
+    wordlist_=_list_;
+}

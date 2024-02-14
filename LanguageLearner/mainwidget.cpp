@@ -22,6 +22,11 @@ MainWidget::MainWidget(QWidget *parent)
         ui->DisplayWidget_->setWord(new Word());
         ui->DisplayWidget_->setMode(1);
     });
+    connect(ui->DisplayWidget_,&DisplayWidget::save,[=](QString _str_){});
+
+    connect(ui->SearchingWidget_,&SearchingWidget::search,[=](QString _str_){
+        ui->SearchingResult_->setWordList(wordlist_.searchWords(_str_));
+    });
 }
 
 MainWidget::~MainWidget()

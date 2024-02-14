@@ -12,12 +12,19 @@ class WordList
 {
 public:
 	WordList();
+    ~WordList();
+
+    QList<QString> getWords();
+    QList<QString> searchWords(QString _str_);
 	void addWord(QString _word_,Word* _wordInfo_);
 	void editWord(QString _word_,Word* _wordInfo_);
-	void deleteWord(QString _word_);
-	bool count(QString _word_);
+    int deleteWord(QString _word_);
+    int countWord(QString _word_);
 
-	QString getWord();
+    QList<QString> getProperties(QString _word_);
+    QString getProperties(QString _word_,QString _key_);
+
+    QString topWord();
 	void pushWord(QString _word_);
 
 private:

@@ -1,22 +1,46 @@
 #include "wordlist.h"
 
 WordList::WordList(){}
+WordList::~WordList(){}
 
-void WordList::addWord(QString _word_,Word* _wordInfo_){
-	map_.insert(_word_,QPair<Word*,int>(_wordInfo_,0));
+QList<QString> WordList::getWords(){
+    return map_.keys();
 }
-void WordList::editWord(QString _word_,Word* _wordInfo_){
-	map_[_word_].first=_wordInfo_;
+QList<QString> WordList::searchWords(QString _str_){
+    QList<QString> words;
+    for(auto it=map_.lowerBound(_str_);it!=map_.end();it++){
+        if(it.key().left(_str_.size())!=_str_) break;
+        words.push_back(it.key());
+    }
+    return words;
 }
-void WordList::deleteWord(QString _word_){
+void WordList::addWord(QString _word_,Word* _wordinfo_){
+    if(_word_!=_wordinfo_->word()) return;
+    map_.insert(_word_,QPair<Word*,int>(_wordinfo_,0));
+}
+void WordList::editWord(QString _word_,Word* _wordinfo_){
+    if(_word_!=_wordinfo_->word()){
+        QString word=_wordinfo_->word();
+        map_.insert(word,QPair<Word*,int>(_wordinfo_,map_[_word_].second));
+        map_.remove(_word_);
+    }else map_[_word_].first=_wordinfo_;
+}
+int WordList::deleteWord(QString _word_){
 	delete map_[_word_].first;
-	map_.remove(_word_);
+    return map_.remove(_word_);
 }
-bool WordList::count(QString _word_){
+int WordList::countWord(QString _word_){
 	return map_.count(_word_);
 }
 
-QString WordList::getWord(){
+QList<QString> WordList::getProperties(QString _word_){
+    return map_[_word_].first->properties();
+}
+QString WordList::getProperties(QString _word_,QString _key_){
+    return map_[_word_].first->property(_key_);
+}
+
+QString WordList::topWord(){
 	QString word=top();
 	pop();
 	return word;

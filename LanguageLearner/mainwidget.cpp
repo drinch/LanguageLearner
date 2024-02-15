@@ -22,7 +22,10 @@ MainWidget::MainWidget(QWidget *parent)
         ui->DisplayWidget_->setWord(new Word());
         ui->DisplayWidget_->setMode(1);
     });
-    connect(ui->DisplayWidget_,&DisplayWidget::save,[=](QString _str_){});
+    connect(ui->DisplayWidget_,&DisplayWidget::save,[=](QString _str_,Word* _word_){
+        if(!wordlist_.countWord(_str_)) wordlist_.addWord(_str_,_word_);
+        else wordlist_.editWord(_str_,_word_);
+    });
 
     connect(ui->SearchingWidget_,&SearchingWidget::search,[=](QString _str_){
         ui->SearchingResult_->setWordList(wordlist_.searchWords(_str_));

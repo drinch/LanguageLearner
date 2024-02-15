@@ -10,7 +10,7 @@ public:
     Word();
     ~Word();
 
-    QString word();
+    QString word()const;
     void setWord(QString _str_);
 
     int propertyNumber();

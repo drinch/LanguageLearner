@@ -35,7 +35,7 @@ DisplayWidget::DisplayWidget(QWidget *parent) :
                     wordcopy_->addProperty(interface_[i*2]->text(),interface_[i*2+1]->text());
                 else wordcopy_->editProperty(interface_[i*2]->text(),interface_[i*2+1]->text());
             }
-            save(wordstr);
+            save(wordstr,wordcopy_);
             word_=wordcopy_;
             wordcopy_=nullptr;
         }

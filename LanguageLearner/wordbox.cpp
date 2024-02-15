@@ -15,9 +15,13 @@ WordBox::~WordBox()
     delete ui;
 }
 
-void WordBox::setWord(const Word *_word_){
+void WordBox::setWord(QString _word_){
     word_=_word_;
 }
 void WordBox::setPlace(int _i_){
+    place_=_i_;
     move(0,_i_*height());
+}
+void WordBox::showWord(){
+    ui->WordLabel_->setText(word_);
 }

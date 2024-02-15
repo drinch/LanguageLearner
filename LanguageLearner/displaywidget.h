@@ -39,7 +39,7 @@ private:
 
 signals:
     void back();
-    void save(QString _word_);
+    void save(QString _str_,Word* _word_);
 };
 
 #endif // DISPLAYWIDGET_H

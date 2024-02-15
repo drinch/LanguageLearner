@@ -3,7 +3,7 @@
 Word::Word(){}
 Word::~Word(){}
 
-QString Word::word(){
+QString Word::word()const{
     return word_;
 }
 void Word::setWord(QString _str_){

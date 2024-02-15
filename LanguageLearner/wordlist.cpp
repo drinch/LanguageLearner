@@ -1,7 +1,11 @@
 #include "wordlist.h"
 
 WordList::WordList(){}
-WordList::~WordList(){}
+WordList::~WordList(){
+    for(auto word:map_){
+        delete word.first;
+    }
+}
 
 QList<QString> WordList::getWords(){
     return map_.keys();
@@ -14,15 +18,27 @@ QList<QString> WordList::searchWords(QString _str_){
     }
     return words;
 }
+
+Word WordList::getWord(QString _str_){
+    if(!map_.count(_str_)) return Word();
+    return *map_[_str_].first;
+}
+int WordList::getWeight(QString _str_){
+    if(!map_.count(_str_)) return -1;
+    return map_[_str_].second;
+}
+
 void WordList::addWord(QString _word_,Word* _wordinfo_){
     if(_word_!=_wordinfo_->word()) return;
     map_.insert(_word_,QPair<Word*,int>(_wordinfo_,0));
+    pushWord(_word_);
 }
 void WordList::editWord(QString _word_,Word* _wordinfo_){
     if(_word_!=_wordinfo_->word()){
         QString word=_wordinfo_->word();
         map_.insert(word,QPair<Word*,int>(_wordinfo_,map_[_word_].second));
         map_.remove(_word_);
+        pushWord(word);
     }else map_[_word_].first=_wordinfo_;
 }
 int WordList::deleteWord(QString _word_){
@@ -33,15 +49,12 @@ int WordList::countWord(QString _word_){
 	return map_.count(_word_);
 }
 
-QList<QString> WordList::getProperties(QString _word_){
-    return map_[_word_].first->properties();
-}
-QString WordList::getProperties(QString _word_,QString _key_){
-    return map_[_word_].first->property(_key_);
-}
-
 QString WordList::topWord(){
 	QString word=top();
+    while(!map_.count(word)){
+        pop();
+        word=top();
+    }
 	pop();
 	return word;
 }

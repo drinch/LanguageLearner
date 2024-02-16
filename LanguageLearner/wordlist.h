@@ -28,6 +28,8 @@ public:
     QString topWord();
 	void pushWord(QString _word_);
 
+    void debug_ShowWord();
+
 private:
 	QMap<QString,QPair<Word*,int> > map_;
 	QVector<QString> queue_;

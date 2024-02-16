@@ -21,7 +21,6 @@ public:
     int deleteProperty(QString _key_);
     int countProperty(QString _key_);
 
-
 	QString save();
 	void load(QString _str_);
 

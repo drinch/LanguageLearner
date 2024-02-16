@@ -19,19 +19,22 @@ public:
 	explicit DisplayWidget(QWidget *parent = nullptr);
 	~DisplayWidget();
 
-    void setWord(Word* _word_);
+    Word getWord()const;
+
+    void setWord(const Word _word_);
     void setMode(int _mode_);
 
 private:
 	Ui::DisplayWidget *ui;
-    bool editmode_;
-    Word *word_,*wordcopy_;
+
+    bool running,editmode_;
+    Word word_;
     QVector<QLineEdit*> interface_;
     QVector<QPushButton*> button_;
     QVector<QString> properties_;
 
-    void createInterface();
-    void setInterface();
+    void setInterfaceWord();
+    void setInterfaceMode();
     void deleteInterface();
 
     void addProperty(QString _key_,QString _value_);
@@ -39,7 +42,7 @@ private:
 
 signals:
     void back();
-    void save(QString _str_,Word* _word_);
+    void save(QString _str_);
 };
 
 #endif // DISPLAYWIDGET_H

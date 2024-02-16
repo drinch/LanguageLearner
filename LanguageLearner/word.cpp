@@ -33,7 +33,5 @@ int Word::countProperty(QString _key_){
     return properties_.count(_key_);
 }
 
-
-
 QString Word::save(){return "";}
 void Word::load(QString _str_){_str_="";}

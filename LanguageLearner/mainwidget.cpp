@@ -1,6 +1,8 @@
 #include "mainwidget.h"
 #include "ui_mainwidget.h"
 
+#include<QDebug>
+
 MainWidget::MainWidget(QWidget *parent)
     : QWidget(parent)
     , ui(new Ui::MainWidget)
@@ -19,12 +21,16 @@ MainWidget::MainWidget(QWidget *parent)
     connect(ui->SearchingWidget_,&SearchingWidget::addWord,[=](){mainSwitch(1);});
     connect(ui->SearchingWidget_,&SearchingWidget::addWord,
             [=](){
-        ui->DisplayWidget_->setWord(new Word());
+        ui->DisplayWidget_->setWord(Word());
         ui->DisplayWidget_->setMode(1);
     });
-    connect(ui->DisplayWidget_,&DisplayWidget::save,[=](QString _str_,Word* _word_){
-        if(!wordlist_.countWord(_str_)) wordlist_.addWord(_str_,_word_);
-        else wordlist_.editWord(_str_,_word_);
+    connect(ui->DisplayWidget_,&DisplayWidget::save,[=](QString _str_){
+        Word word=ui->DisplayWidget_->getWord();
+        if(!wordlist_.countWord(_str_))
+            wordlist_.addWord(word.word(),new Word(word));
+        else wordlist_.editWord(_str_,new Word(word));
+        qDebug()<<"====wordlist====";
+        wordlist_.debug_ShowWord();
     });
 
     connect(ui->SearchingWidget_,&SearchingWidget::search,[=](QString _str_){

@@ -1,4 +1,6 @@
-#include "wordlist.h"
+#include"wordlist.h"
+
+#include<QDebug>
 
 WordList::WordList(){}
 WordList::~WordList(){
@@ -31,14 +33,14 @@ int WordList::getWeight(QString _str_){
 void WordList::addWord(QString _word_,Word* _wordinfo_){
     if(_word_!=_wordinfo_->word()) return;
     map_.insert(_word_,QPair<Word*,int>(_wordinfo_,0));
-    pushWord(_word_);
+    //pushWord(_word_);
 }
 void WordList::editWord(QString _word_,Word* _wordinfo_){
     if(_word_!=_wordinfo_->word()){
         QString word=_wordinfo_->word();
         map_.insert(word,QPair<Word*,int>(_wordinfo_,map_[_word_].second));
         map_.remove(_word_);
-        pushWord(word);
+        //pushWord(word);
     }else map_[_word_].first=_wordinfo_;
 }
 int WordList::deleteWord(QString _word_){
@@ -117,4 +119,10 @@ int WordList::rson(int i){
 }
 int WordList::fa(int i){
 	return (i-1)/2;
+}
+
+void WordList::debug_ShowWord(){
+    for(auto word:map_){
+        qDebug()<<word.first->word();
+    }
 }

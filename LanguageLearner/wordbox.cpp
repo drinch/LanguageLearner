@@ -1,5 +1,7 @@
-#include "wordbox.h"
-#include "ui_wordbox.h"
+#include"wordbox.h"
+#include"ui_wordbox.h"
+
+#include<QDebug>
 
 WordBox::WordBox(QWidget *parent,int _height_) :
     QWidget(parent),
@@ -7,21 +9,26 @@ WordBox::WordBox(QWidget *parent,int _height_) :
     place_(0)
 {
     ui->setupUi(this);
-    resize(parent->width(),_height_);
+    resize(parent->width()-10,_height_-4);
+    qDebug()<<"addNewBox";
 }
 
-WordBox::~WordBox()
-{
+WordBox::~WordBox(){
     delete ui;
 }
 
-void WordBox::setWord(QString _word_){
+void WordBox::setWord(const Word &_word_){
     word_=_word_;
 }
 void WordBox::setPlace(int _i_){
     place_=_i_;
-    move(0,_i_*height());
+    move(5,_i_*height()+5);
 }
 void WordBox::showWord(){
-    ui->WordLabel_->setText(word_);
+    qDebug()<<"showwordofthebox";
+    ui->WordLabel_->setText(word_.word());
+}
+
+void WordBox::mouseReleaseEvent(QMouseEvent *event){
+    emit clicked();
 }

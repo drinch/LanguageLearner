@@ -17,14 +17,19 @@ public:
     explicit WordBox(QWidget *parent = nullptr,int _height_=0);
     ~WordBox();
 
-    void setWord(QString _word_);
+    void setWord(const Word &_word_);
     void setPlace(int _i_);
     void showWord();
 
+    void mouseReleaseEvent(QMouseEvent *event);
+
 private:
     Ui::WordBox *ui;
-    QString word_;
+    Word word_;
     int place_;
+
+signals:
+    void clicked();
 };
 
 #endif // WORDBOX_H

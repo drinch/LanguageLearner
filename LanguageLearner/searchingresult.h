@@ -4,6 +4,9 @@
 #include<QWidget>
 #include<QVector>
 
+#include"word.h"
+#include"wordbox.h"
+
 namespace Ui {
 class SearchingResult;
 }
@@ -16,14 +19,15 @@ public:
 	explicit SearchingResult(QWidget *parent = nullptr);
     ~SearchingResult();
 
-    void setWordList(QList<QString> _list_);
+    void setWordList(QList<Word> _list_);
 
 private:
 	Ui::SearchingResult *ui;
-    QList<QString> wordlist_;
+    QList<Word> wordlist_;
+    QList<WordBox*> boxlist_;
 
 signals:
-    void check(QString _word_);
+    void check(Word _word_);
 };
 
 #endif // SEARCHINGRESULT_H

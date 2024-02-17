@@ -15,6 +15,8 @@ public:
 	explicit SearchingWidget(QWidget *parent = nullptr);
 	~SearchingWidget();
 
+    void clear();
+
 private:
 	Ui::SearchingWidget *ui;
 

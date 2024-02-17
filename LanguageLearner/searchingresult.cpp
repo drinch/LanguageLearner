@@ -2,6 +2,7 @@
 #include "ui_searchingresult.h"
 
 #include<wordbox.h>
+#include<QDebug>
 
 SearchingResult::SearchingResult(QWidget *parent) :
 	QWidget(parent),
@@ -15,15 +16,23 @@ SearchingResult::~SearchingResult()
 	delete ui;
 }
 
-void SearchingResult::setWordList(QList<QString> _list_){
+void SearchingResult::setWordList(QList<Word> _list_){
     wordlist_=_list_;
-    QList<QString>::iterator it=wordlist_.begin();
+    ui->scrollAreaWidget_->setMinimumHeight(70*wordlist_.size()+6);
+    for(auto box:boxlist_){
+        delete box;
+    }
+    boxlist_.clear();
+    QList<Word>::iterator it=wordlist_.begin();
     for(int i=0;i<wordlist_.size();i++){
-        WordBox* box=new WordBox(this,70);
-        box->setWord(*it);
-        box->setPlace(i);
-        box->showWord();
-        box->show();
+        boxlist_.append(new WordBox(ui->scrollAreaWidget_,70));
+        boxlist_[i]->setWord(*it);
+        boxlist_[i]->setPlace(i);
+        boxlist_[i]->showWord();
+        connect(boxlist_[i],&WordBox::clicked,[=](){
+            emit check(*it);
+        });
+        boxlist_[i]->show();
         it++;
     }
 }

@@ -15,7 +15,7 @@ public:
     ~WordList();
 
     QList<QString> getWords();
-    QList<QString> searchWords(QString _str_);
+    QList<Word> searchWords(QString _str_);
 
     Word getWord(QString _str_);
     int getWeight(QString _str_);
@@ -25,28 +25,12 @@ public:
     int deleteWord(QString _word_);
     int countWord(QString _word_);
 
-    QString topWord();
-	void pushWord(QString _word_);
+    QVector<Word> getTestWords(int _n_);
 
     void debug_ShowWord();
 
 private:
-	QMap<QString,QPair<Word*,int> > map_;
-	QVector<QString> queue_;
-
-	bool cmp(QString _wordA_,QString _wordB_);
-	QString top();
-	void push(QString _word_);
-	void pop();
-	bool empty();
-
-	bool isValid(int _index_);
-	void down(int _index_);
-	void up(int _index_);
-
-	static int lson(int i);
-	static int rson(int i);
-	static int fa(int i);
+    QMap<QString,QPair<Word*,int> > map_;
 };
 
 #endif // WORDLIST_H

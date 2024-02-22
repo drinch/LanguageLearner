@@ -24,21 +24,30 @@ public:
     void setWord(const Word _word_);
     void setMode(int _mode_);
 
+    void resizeEvent(QResizeEvent *event);
+
 private:
 	Ui::DisplayWidget *ui;
 
-    bool running,editmode_;
+    bool running_,editmode_;
+    int height_;
     Word word_;
-    QVector<QLineEdit*> interface_;
+    QLineEdit *title_,*additionalproperty_;
+    QPushButton* addbutton_;
+    QVector<QLineEdit*> keyofproperties_,valueofproperties_;
     QVector<QPushButton*> button_;
     QVector<QString> properties_;
 
     void setInterfaceWord();
-    void setInterfaceMode();
+    void changeMode();
     void deleteInterface();
 
     void addProperty(QString _key_,QString _value_);
     void deleteProperty(int _index_);
+
+    int numberOfP();
+    void setMH(int _height_);
+    void resizeW();
 
 signals:
     void back();

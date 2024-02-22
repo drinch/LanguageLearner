@@ -8,25 +8,28 @@
 DisplayWidget::DisplayWidget(QWidget *parent) :
 	QWidget(parent),
     ui(new Ui::DisplayWidget),
-    running(0),editmode_(0)
+    running_(0),editmode_(0),
+    height_(70)
 {
     ui->setupUi(this);
 
-    ui->MainWidget_->setMinimumHeight(70*2);
-    interface_.append(new QLineEdit(word_.word(),ui->MainWidget_));
-    interface_.append(new QLineEdit(ui->MainWidget_));
-    interface_[0]->resize(width()-10,60);
-    interface_[0]->move(5,5);
-    interface_[0]->setReadOnly(1);
-    interface_[0]->show();
-    interface_[1]->resize(62,60);
-    interface_[1]->move(5,70+5);
-    button_.append(new QPushButton("添加属性",ui->MainWidget_));
-    button_[0]->resize(width()-78,60);
-    button_[0]->move(73,70+5);
-    connect(button_[0],&QPushButton::clicked,[=](){
-        addProperty(interface_[1]->text(),"");
-        interface_[1]->setText("");
+    title_=new QLineEdit(ui->MainWidget_);
+    additionalproperty_=new QLineEdit(ui->MainWidget_);
+    addbutton_=new QPushButton("添加属性",ui->MainWidget_);
+
+    setMH(height_);
+    title_->resize(width()-10,60);
+    qDebug()<<title_->width();
+    title_->move(5,5);
+    title_->setReadOnly(1);
+    title_->show();
+    additionalproperty_->resize(62,60);
+    additionalproperty_->move(5,70+5);
+    addbutton_->resize(width()-78,60);
+    addbutton_->move(73,70+5);
+    connect(addbutton_,&QPushButton::clicked,[=](){
+        addProperty(additionalproperty_->text(),"");
+        additionalproperty_->setText("");
     });
 
     connect(ui->ReturnButton_,&QPushButton::clicked,[=](){
@@ -38,7 +41,7 @@ DisplayWidget::DisplayWidget(QWidget *parent) :
         qDebug()<<"clicked";
         if(editmode_){
             QString wordstr=word_.word();
-            word_.setWord(interface_[0]->text());
+            word_.setWord(title_->text());
             qDebug()<<"set title";
             for(int i=0;i<properties_.size();i++){
                 if(word_.countProperty(properties_[i])){
@@ -46,10 +49,10 @@ DisplayWidget::DisplayWidget(QWidget *parent) :
                 }
             }
             qDebug()<<"deleted properties";
-            for(int i=1;i<interface_.size()/2;i++){
-                if(!word_.countProperty(interface_[i*2]->text()))
-                    word_.addProperty(interface_[i*2]->text(),interface_[i*2+1]->text());
-                else word_.editProperty(interface_[i*2]->text(),interface_[i*2+1]->text());
+            for(int i=0;i<numberOfP();i++){
+                if(!word_.countProperty(keyofproperties_[i]->text()))
+                    word_.addProperty(keyofproperties_[i]->text(),valueofproperties_[i]->text());
+                else word_.editProperty(keyofproperties_[i]->text(),valueofproperties_[i]->text());
             }
             qDebug()<<"add properties";
             save(wordstr);
@@ -65,110 +68,140 @@ DisplayWidget::~DisplayWidget()
 }
 
 Word DisplayWidget::getWord()const{
-    if(!running) return Word();
+    if(!running_) return Word();
     return word_;
 }
 
 void DisplayWidget::setWord(const Word _word_){
-    if(running) return;
-    running=1;
+    if(running_) return;
+    running_=1;
     word_=_word_;
     setInterfaceWord();
+    if(editmode_) changeMode();
 }
 void DisplayWidget::setMode(int _mode_){
-    if(!running) return;
     editmode_=_mode_;
-    setInterfaceMode();
+    if(!running_) return;
+    changeMode();
 }
 
 void DisplayWidget::setInterfaceWord(){
-    interface_[0]->setText(word_.word());
+    title_->setText(word_.word());
     for(auto pro:word_.properties()){
         addProperty(pro,word_.property(pro));
     }
 }
-void DisplayWidget::setInterfaceMode(){
+void DisplayWidget::changeMode(){
     if(editmode_){
-        interface_[0]->setReadOnly(0);
-        ui->MainWidget_->setMinimumHeight(interface_.size()/2*70+70);
-        interface_[1]->show();
-        button_[0]->show();
-        for(int i=1;i<interface_.size()/2;i++){
-            interface_[2*i+1]->resize(width()-146,60);
-            interface_[2*i+1]->setReadOnly(0);
+        title_->setReadOnly(0);
+        setMH(numberOfP()*70+70);
+        additionalproperty_->show();
+        addbutton_->show();
+        for(int i=0;i<numberOfP();i++){
+            valueofproperties_[i]->resize(width()-146,60);
+            valueofproperties_[i]->setReadOnly(0);
             button_[i]->show();
         }
     }else{
-        interface_[0]->setReadOnly(1);
-        ui->MainWidget_->setMinimumHeight((interface_.size()/2-1)*70+70);
-        interface_[1]->hide();
-        button_[0]->hide();
-        for(int i=1;i<interface_.size()/2;i++){
-            interface_[2*i+1]->resize(width()-78,60);
-            interface_[2*i+1]->setReadOnly(1);
+        title_->setReadOnly(1);
+        setMH(numberOfP()*70+70);
+        additionalproperty_->hide();
+        addbutton_->hide();
+        for(int i=0;i<numberOfP();i++){
+            valueofproperties_[i]->resize(width()-78,60);
+            valueofproperties_[i]->setReadOnly(1);
             button_[i]->hide();
         }
     }
 }
 void DisplayWidget::deleteInterface(){
-    running=0;
-    for(int i=2;i<interface_.size();i++){
-        delete interface_[i];
-    }
-    for(int i=1;i<button_.size();i++){
+    running_=0;
+    for(int i=0;i<numberOfP();i++){
+        delete keyofproperties_[i];
+        delete valueofproperties_[i];
         delete button_[i];
     }
-    interface_.resize(2);
-    button_.resize(1);
-    interface_[0]->setText("");
-    interface_[1]->setText("");
-    ui->MainWidget_->setMinimumHeight(70*2);
+    keyofproperties_.clear();
+    valueofproperties_.clear();
+    button_.clear();
+    title_->setText("");
+    additionalproperty_->setText("");
+    additionalproperty_->move(5,70+5);
+    addbutton_->move(73,70+5);
+    setMH(height_);
 }
 
 void DisplayWidget::addProperty(QString _key_,QString _value_){
-    int i=interface_.size()/2,x=interface_[1]->x(),y=interface_[1]->y();
-    interface_.append(new QLineEdit(_key_,ui->MainWidget_));
-    interface_.append(new QLineEdit(_value_,ui->MainWidget_));
-    interface_[i*2]->resize(62,60);
-    interface_[i*2]->move(x,y);
-    interface_[i*2]->setReadOnly(1);
-    interface_[i*2]->show();
-    interface_[i*2+1]->resize(width()-(editmode_?146:78),60);
-    interface_[i*2+1]->move(x+68,y);
-    if(!editmode_) interface_[i*2+1]->setReadOnly(1);
-    interface_[i*2+1]->show();
+    int i=numberOfP(),y=height_*(i+1);
+
+    keyofproperties_.append(new QLineEdit(_key_,ui->MainWidget_));
+    keyofproperties_[i]->resize(62,60);
+    keyofproperties_[i]->move(5,y+5);
+    keyofproperties_[i]->setReadOnly(1);
+    keyofproperties_[i]->show();
+
+    valueofproperties_.append(new QLineEdit(_value_,ui->MainWidget_));
+    valueofproperties_[i]->resize(width()-(editmode_?146:78),60);
+    valueofproperties_[i]->move(73,y+5);
+    if(!editmode_) valueofproperties_[i]->setReadOnly(1);
+    valueofproperties_[i]->show();
+
     button_.append(new QPushButton("x",ui->MainWidget_));
     button_[i]->resize(62,60);
-    button_[i]->move(width()-67,y);
+    button_[i]->move(width()-67,y+5);
     connect(button_[i],&QPushButton::clicked,[=](){
         deleteProperty(i);
     });
     if(editmode_) button_[i]->show();
-    interface_[1]->move(interface_[1]->x(),interface_[1]->y()+70);
-    button_[0]->move(button_[0]->x(),button_[0]->y()+70);
-    ui->MainWidget_->setMinimumHeight(button_.size()*70+70);
+
+    additionalproperty_->move(additionalproperty_->x(),additionalproperty_->y()+70);
+    addbutton_->move(addbutton_->x(),addbutton_->y()+70);
+    setMH((numberOfP()+(editmode_?2:1))*70);
 }
 void DisplayWidget::deleteProperty(int _index_){
-    properties_.append(interface_[_index_*2]->text());
-    delete interface_[_index_*2];
-    delete interface_[_index_*2+1];
+    properties_.append(keyofproperties_[_index_]->text());
+    delete keyofproperties_[_index_];
+    delete valueofproperties_[_index_];
     delete button_[_index_];
-    for(int i=_index_+1;i<interface_.size()/2;i++){
-        interface_[i*2]->move(interface_[i*2]->x(),interface_[i*2]->y()-70);
-        interface_[i*2+1]->move(interface_[i*2+1]->x(),interface_[i*2+1]->y()-70);
+    for(int i=_index_+1;i<numberOfP();i++){
+        keyofproperties_[i]->move(keyofproperties_[i]->x(),keyofproperties_[i]->y()-70);
+        valueofproperties_[i]->move(valueofproperties_[i]->x(),valueofproperties_[i]->y()-70);
         button_[i]->move(button_[i]->x(),button_[i]->y()-70);
         button_[i]->disconnect();
         connect(button_[i],&QPushButton::clicked,[=](){
             deleteProperty(i-1);
         });
-        interface_[i*2-2]=interface_[i*2];
-        interface_[i*2-1]=interface_[i*2+1];
+        keyofproperties_[i-1]=keyofproperties_[i];
+        valueofproperties_[i-1]=valueofproperties_[i];
         button_[i-1]=button_[i];
     }
-    interface_.pop_back();
-    interface_.pop_back();
+    keyofproperties_.pop_back();
+    valueofproperties_.pop_back();
     button_.pop_back();
-    interface_[1]->move(interface_[1]->x(),interface_[1]->y()-70);
-    button_[0]->move(button_[0]->x(),button_[0]->y()-70);
-    ui->MainWidget_->setMinimumHeight(button_.size()*70+70);
+    additionalproperty_->move(additionalproperty_->x(),additionalproperty_->y()-70);
+    addbutton_->move(addbutton_->x(),addbutton_->y()-70);
+    setMH(numberOfP()*70+70);
+}
+
+int DisplayWidget::numberOfP(){
+    return keyofproperties_.size();
+}
+void DisplayWidget::setMH(int _height_){
+    ui->MainWidget_->setMinimumHeight(_height_);
+}
+
+void DisplayWidget::resizeW(){
+    title_->resize(width()-10,title_->height());
+    for(auto vop:valueofproperties_){
+        vop->resize(width()-(editmode_?146:78),vop->height());
+    }
+    for(auto btn:button_){
+        btn->move(width()-67,btn->y());
+    }
+    addbutton_->resize(width()-78,addbutton_->height());
+}
+
+void DisplayWidget::resizeEvent(QResizeEvent *event){
+    qDebug()<<"resizeEvent";
+    resizeW();
 }

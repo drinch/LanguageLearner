@@ -2,6 +2,7 @@
 #define WORD_H
 
 #include<QString>
+#include<QDataStream>
 #include<QMap>
 
 class Word
@@ -21,8 +22,8 @@ public:
     int deleteProperty(QString _key_);
     int countProperty(QString _key_);
 
-	QString save();
-	void load(QString _str_);
+    void serialize(QDataStream &out)const;
+    static Word deserialize(QDataStream &in);
 
 	bool operator < (Word &_word_) const {return word_<_word_.word_;}
 

@@ -1,12 +1,35 @@
 #include"wordlist.h"
 
+#include<QFile>
+#include<QDataStream>
+
 #include<QDebug>
 
-WordList::WordList(){}
+WordList::WordList(){
+    QFile file("data.txt");
+    file.open(QIODevice::ReadOnly);
+    QDataStream in(&file);
+    Word word;
+    int i;
+    while(!in.atEnd()){
+        word=Word::deserialize(in);
+        in>>i;
+        qDebug()<<"Starting Check"<<word.word()<<" "<<i;
+        addWord(word.word(),new Word(word),i);
+    }
+    file.close();
+}
 WordList::~WordList(){
+    QFile file("data.txt");
+    file.open(QIODevice::WriteOnly);
+    QDataStream out(&file);
     for(auto word:map_){
+        word.first->serialize(out);
+        out<<word.second;
+        qDebug()<<word.first->word();
         delete word.first;
     }
+    file.close();
 }
 
 QList<QString> WordList::getWords(){
@@ -30,9 +53,9 @@ int WordList::getWeight(QString _str_){
     return map_[_str_].second;
 }
 
-void WordList::addWord(QString _word_,Word* _wordinfo_){
+void WordList::addWord(QString _word_,Word* _wordinfo_,int _weight_){
     if(_word_!=_wordinfo_->word()) return;
-    map_.insert(_word_,QPair<Word*,int>(_wordinfo_,0));
+    map_.insert(_word_,QPair<Word*,int>(_wordinfo_,_weight_));
 }
 void WordList::editWord(QString _word_,Word* _wordinfo_){
     if(_word_!=_wordinfo_->word()){

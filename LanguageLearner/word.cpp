@@ -33,5 +33,11 @@ int Word::countProperty(QString _key_){
     return properties_.count(_key_);
 }
 
-QString Word::save(){return "";}
-void Word::load(QString _str_){_str_="";}
+void Word::serialize(QDataStream &out)const{
+    out<<word_<<properties_;
+}
+Word Word::deserialize(QDataStream &in){
+    Word word;
+    in>>word.word_>>word.properties_;
+    return word;
+}

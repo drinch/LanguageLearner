@@ -30,7 +30,7 @@
     <number>0</number>
    </property>
    <item>
-    <widget class="QWidget" name="TopBar_" native="true">
+    <widget class="QWidget" name="TopBar" native="true">
      <property name="minimumSize">
       <size>
        <width>0</width>
@@ -45,14 +45,14 @@
      </property>
      <layout class="QHBoxLayout" name="horizontalLayout">
       <item>
-       <widget class="QPushButton" name="ReturnButton_">
+       <widget class="QPushButton" name="ReturnButton">
         <property name="text">
          <string>PushButton</string>
         </property>
        </widget>
       </item>
       <item>
-       <spacer name="horizontalSpacer_">
+       <spacer name="HorizontalSpacer">
         <property name="orientation">
          <enum>Qt::Horizontal</enum>
         </property>
@@ -68,52 +68,75 @@
     </widget>
    </item>
    <item>
-    <widget class="QWidget" name="MainWidget_" native="true">
-     <layout class="QVBoxLayout" name="verticalLayout_2">
-      <item>
-       <widget class="QWidget" name="ProblemWidget_" native="true">
-        <layout class="QVBoxLayout" name="verticalLayout_3">
-         <item>
-          <widget class="QTextBrowser" name="Problem_"/>
-         </item>
-        </layout>
-       </widget>
-      </item>
-      <item>
-       <widget class="QWidget" name="AnswerWidget_" native="true">
-        <layout class="QGridLayout" name="gridLayout">
-         <item row="0" column="0">
-          <widget class="QPushButton" name="A_">
-           <property name="text">
-            <string>PushButton</string>
-           </property>
-          </widget>
-         </item>
-         <item row="1" column="0">
-          <widget class="QPushButton" name="C_">
-           <property name="text">
-            <string>PushButton</string>
-           </property>
-          </widget>
-         </item>
-         <item row="0" column="1">
-          <widget class="QPushButton" name="B_">
-           <property name="text">
-            <string>PushButton</string>
-           </property>
-          </widget>
-         </item>
-         <item row="1" column="1">
-          <widget class="QPushButton" name="D_">
-           <property name="text">
-            <string>PushButton</string>
-           </property>
-          </widget>
-         </item>
-        </layout>
-       </widget>
-      </item>
-     </layout>
+    <widget class="QStackedWidget" name="StackedWidget">
+     <property name="currentIndex">
+      <number>1</number>
+     </property>
+     <widget class="QWidget" name="Page1">
+      <layout class="QVBoxLayout" name="verticalLayout_4">
+       <item>
+        <widget class="QTextBrowser" name="QuestionBrowser"/>
+       </item>
+       <item>
+        <widget class="QWidget" name="ButtonWidget" native="true">
+         <layout class="QGridLayout" name="gridLayout">
+          <item row="0" column="0">
+           <widget class="QPushButton" name="ButtonA">
+            <property name="text">
+             <string>PushButton</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="1">
+           <widget class="QPushButton" name="ButtonB">
+            <property name="text">
+             <string>PushButton</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="0">
+           <widget class="QPushButton" name="ButtonC">
+            <property name="text">
+             <string>PushButton</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="1">
+           <widget class="QPushButton" name="ButtonD">
+            <property name="text">
+             <string>PushButton</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="Page2">
+      <layout class="QVBoxLayout" name="verticalLayout_2">
+       <item>
+        <widget class="QTextBrowser" name="QuestionBrowser2"/>
+       </item>
+       <item>
+        <widget class="QLineEdit" name="LineEdit"/>
+       </item>
+       <item>
+        <widget class="QPushButton" name="ConfirmButton">
+         <property name="text">
+          <string>确认</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="Page3">
+      <layout class="QVBoxLayout" name="verticalLayout_3">
+       <item>
+        <widget class="QTextBrowser" name="ResultBrowser"/>
+       </item>
+      </layout>
+     </widget>
     </widget>
    </item>
   </layout>

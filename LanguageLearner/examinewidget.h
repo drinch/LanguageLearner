@@ -29,8 +29,14 @@ private:
     QVector<QString> examinelist_;
     QVector<int> examinescore_;
 
+    int rightchoiceindex_;
+
+    void createChoiceQuestion(QString _question_,QString _choice_[4]);
+    void createBlankFillingQuestion(QString _question_,QString _answer_);
+
 signals:
     void end();
+    void check(bool _result_);
 };
 
 #endif // EXAMINEWIDGET_H

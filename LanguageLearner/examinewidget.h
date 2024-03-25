@@ -3,6 +3,7 @@
 
 #include<QWidget>
 #include<QVector>
+#include"word.h"
 
 namespace Ui {
 class ExamineWidget;
@@ -18,14 +19,14 @@ public:
 
     void setExamineType(int _type_);
     void setNumber(int _number_);
-    void readExamineList();
-    void startExamine();
-    void endExamine();
+    void setWords(QVector<Word> &_wordlist_);
+    void generateProblem();
+    void readExamineList(int _index_);
 
 private:
 	Ui::ExamineWidget *ui;
-    int examinetype_;
-    int number_;
+    int examinetype_,number_,currentindex_;
+    QVector<Word> wordlist_;
     QVector<QString> examinelist_;
     QVector<int> examinescore_;
 

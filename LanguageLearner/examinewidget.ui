@@ -70,7 +70,7 @@
    <item>
     <widget class="QStackedWidget" name="StackedWidget">
      <property name="currentIndex">
-      <number>1</number>
+      <number>0</number>
      </property>
      <widget class="QWidget" name="Page1">
       <layout class="QVBoxLayout" name="verticalLayout_4">

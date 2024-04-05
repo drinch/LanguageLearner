@@ -16,6 +16,7 @@ public:
 	~SearchingWidget();
 
     void clear();
+    void searchAgain();
 
 private:
 	Ui::SearchingWidget *ui;

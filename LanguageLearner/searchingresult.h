@@ -28,6 +28,7 @@ private:
 
 signals:
     void check(Word _word_);
+    void deleted(Word _word_);
 };
 
 #endif // SEARCHINGRESULT_H

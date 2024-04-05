@@ -32,6 +32,9 @@ void SearchingResult::setWordList(QList<Word> _list_){
         connect(boxlist_[i],&WordBox::clicked,[=](){
             emit check(*it);
         });
+        connect(boxlist_[i],&WordBox::deleted,[=](){
+            emit deleted(*it);
+        });
         boxlist_[i]->show();
         it++;
     }

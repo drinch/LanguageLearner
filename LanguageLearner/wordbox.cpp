@@ -11,6 +11,10 @@ WordBox::WordBox(QWidget *parent,int _height_) :
     ui->setupUi(this);
     resize(parent->width()-10,_height_-4);
     qDebug()<<"addNewBox";
+
+    connect(ui->DeleteButton_,&QPushButton::clicked,[=](){
+        emit deleted();
+    });
 }
 
 WordBox::~WordBox(){

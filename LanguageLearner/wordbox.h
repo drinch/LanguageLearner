@@ -30,6 +30,7 @@ private:
 
 signals:
     void clicked();
+    void deleted();
 };
 
 #endif // WORDBOX_H

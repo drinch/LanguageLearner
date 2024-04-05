@@ -15,12 +15,19 @@ MainWidget::MainWidget(QWidget *parent)
 
     connect(ui->Interface_,&Interface::examine,[=](){mainSwitch(2);});
     connect(ui->ExamineWidget_,&ExamineWidget::end,[=](){mainSwitch(0);});
-    connect(ui->SearchingWidget_,&SearchingWidget::search,[=](QString _str_){interfaceSwitch(_str_==""?0:1);});
+    connect(ui->SearchingWidget_,&SearchingWidget::search,[=](QString _str_){
+        ui->SearchingResult_->setWordList(wordlist_.searchWords(_str_));
+        interfaceSwitch(_str_==""?0:1);
+    });
     connect(ui->SearchingResult_,&SearchingResult::check,[=](Word _word_){
         ui->DisplayWidget_->setWord(_word_);
         ui->DisplayWidget_->setMode(0);
         mainSwitch(1);
         ui->SearchingWidget_->clear();
+    });
+    connect(ui->SearchingResult_,&SearchingResult::deleted,[=](Word _word_){
+        wordlist_.deleteWord(_word_.word());
+        ui->SearchingWidget_->searchAgain();
     });
     connect(ui->DisplayWidget_,&DisplayWidget::back,[=](){mainSwitch(0);});
     connect(ui->SearchingWidget_,&SearchingWidget::addWord,
@@ -37,10 +44,6 @@ MainWidget::MainWidget(QWidget *parent)
         else wordlist_.editWord(_str_,new Word(word));
         qDebug()<<"====wordlist====";
         wordlist_.debug_ShowWord();
-    });
-
-    connect(ui->SearchingWidget_,&SearchingWidget::search,[=](QString _str_){
-        ui->SearchingResult_->setWordList(wordlist_.searchWords(_str_));
     });
 }
 

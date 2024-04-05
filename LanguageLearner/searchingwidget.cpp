@@ -19,3 +19,6 @@ SearchingWidget::~SearchingWidget()
 void SearchingWidget::clear(){
     ui->lineEdit->clear();
 }
+void SearchingWidget::searchAgain(){
+    emit search(ui->lineEdit->text());
+}

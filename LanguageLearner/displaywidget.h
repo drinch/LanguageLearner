@@ -29,14 +29,14 @@ public:
 private:
 	Ui::DisplayWidget *ui;
 
-    bool running_,editmode_;
-    int height_;
-    Word word_;
-    QLineEdit *title_,*additionalproperty_;
-    QPushButton* addbutton_;
-    QVector<QLineEdit*> keyofproperties_,valueofproperties_;
-    QVector<QPushButton*> button_;
-    QVector<QString> properties_;
+    bool Running_,EditMode_;
+    int Height_;
+    Word Word_;
+    QLineEdit *Title_,*NewProperty_;
+    QPushButton* AddButton_;
+    QVector<QLineEdit*> KeyOfProperties_,ValueOfProperties_;
+    QVector<QPushButton*> PropertyButton_;
+    QVector<QString> Properties_;
 
     void setInterfaceWord();
     void changeMode();
@@ -48,6 +48,16 @@ private:
     int numberOfP();
     void setMH(int _height_);
     void resizeW();
+
+    int NEWcountProperty(QString _key_);//查找属性编号，不存在返回-1
+    void NEWaddProperty(QString _key_,QString _value_);
+    void NEWsetProperty(QString _key_,QString _value_);
+    void NEWsetProperty(int _index_,QString _value_);
+    void NEWremoveProperty(QString _key_,QString _value_);
+    void NEWremoveProperty(int _index_,QString _value_);
+
+    void NEWsetPropertyPosition(int _index_);//调整编号index的属性的窗口
+    void NEWsetNewPropertyWidgetPosition();
 
 signals:
     void back();

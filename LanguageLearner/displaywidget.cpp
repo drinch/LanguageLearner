@@ -220,8 +220,8 @@ void DisplayWidget::NEWaddProperty(QString _key_,QString _value_){
     Word_.addProperty(_key_,_value_);
 
     int i=KeyOfProperties_.size()-1;
-    NEWsetPropertyPosition(i);
-    NEWsetNewPropertyWidgetPosition();
+    //NEWsetPropertyPosition(i);
+    //NEWsetNewPropertyWidgetPosition();
 }
 void DisplayWidget::NEWsetProperty(QString _key_,QString _value_){
     int i=NEWcountProperty(_key_);
@@ -229,8 +229,25 @@ void DisplayWidget::NEWsetProperty(QString _key_,QString _value_){
     ValueOfProperties_[i]->setText(_value_);
     Word_.editProperty(_key_,_value_);
 }
-void DisplayWidget::NEWsetProperty(int _index_,QString _value_){}
-void DisplayWidget::NEWremoveProperty(QString _key_,QString _value_){}
-void DisplayWidget::NEWremoveProperty(int _index_,QString _value_){}
+void DisplayWidget::NEWsetProperty(int _index_,QString _value_){
+    QString key=KeyOfProperties_[_index_]->text();
+    NEWsetProperty(key,_value_);
+    return;
+}
+void DisplayWidget::NEWremoveProperty(QString _key_,QString _value_){
+    int i=NEWcountProperty(_key_);
+    if(i==-1)return;
+    KeyOfProperties_.remove(i);
+    ValueOfProperties_.remove(i);
+    PropertyButton_.remove(i);
+    return;
+}
+void DisplayWidget::NEWremoveProperty(int _index_,QString _value_){
+    QString key=KeyOfProperties_[_index_]->text();
+    NEWremoveProperty(key,_value_);
+    return;
+}
 
-void DisplayWidget::NEWsetPropertyPosition(int _index_){}
+void DisplayWidget::NEWsetPropertyPosition(int _index_){
+    return;
+}

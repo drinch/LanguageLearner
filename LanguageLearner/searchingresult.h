@@ -5,7 +5,7 @@
 #include<QVector>
 
 #include"word.h"
-#include"wordbox.h"
+#include"wordcard.h"
 
 namespace Ui {
 class SearchingResult;
@@ -21,10 +21,12 @@ public:
 
     void setWordList(QList<Word> _list_);
 
+    void resizeEvent(QResizeEvent *event);
+
 private:
 	Ui::SearchingResult *ui;
     QList<Word> wordlist_;
-    QList<WordBox*> boxlist_;
+    QList<WordCard*> boxlist_;
 
 signals:
     void check(Word _word_);

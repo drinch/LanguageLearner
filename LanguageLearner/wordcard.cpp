@@ -22,6 +22,13 @@ void WordCard::setWord(const Word &_word_){
 }
 void WordCard::showWord(){
     ui->Word_->setText(word_.word());
+    if(word_.countProperty("释义")){
+        ui->Property_->setText("释义");
+        ui->Meaning_->setText(word_.property("释义"));
+    }else{
+        ui->Property_->setText("");
+        ui->Meaning_->setText("");
+    }
 }
 
 void WordCard::mouseReleaseEvent(QMouseEvent *event){

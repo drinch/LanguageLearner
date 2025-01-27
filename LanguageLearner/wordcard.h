@@ -1,30 +1,29 @@
-#ifndef WORDBOX_H
-#define WORDBOX_H
+#ifndef WORDCARD_H
+#define WORDCARD_H
 
 #include <QWidget>
 
 #include"word.h"
 
 namespace Ui {
-class WordBox;
+class WordCard;
 }
 
-class WordBox : public QWidget
+class WordCard : public QWidget
 {
     Q_OBJECT
 
 public:
-    explicit WordBox(QWidget *parent = nullptr,int _height_=0);
-    ~WordBox();
+    explicit WordCard(QWidget *parent = nullptr);
+    ~WordCard();
 
     void setWord(const Word &_word_);
-    void setPlace(int _i_);
     void showWord();
 
     void mouseReleaseEvent(QMouseEvent *event);
 
 private:
-    Ui::WordBox *ui;
+    Ui::WordCard *ui;
     Word word_;
     int place_;
 
@@ -33,4 +32,4 @@ signals:
     void deleted();
 };
 
-#endif // WORDBOX_H
+#endif // WORDCARD_H

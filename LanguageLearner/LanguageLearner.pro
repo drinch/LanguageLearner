@@ -18,7 +18,8 @@ SOURCES += \
     searchingwidget.cpp \
     word.cpp \
     wordcard.cpp \
-    wordlist.cpp
+    wordlist.cpp \
+    wordlistwidget.cpp
 
 HEADERS += \
     displaywidget.h \
@@ -29,7 +30,8 @@ HEADERS += \
     searchingwidget.h \
     word.h \
     wordcard.h \
-    wordlist.h
+    wordlist.h \
+    wordlistwidget.h
 
 FORMS += \
     displaywidget.ui \
@@ -38,7 +40,8 @@ FORMS += \
     mainwidget.ui \
     searchingresult.ui \
     searchingwidget.ui \
-    wordcard.ui
+    wordcard.ui \
+    wordlistwidget.ui
 
 TRANSLATIONS += \
     LanguageLearner_zh_CN.ts

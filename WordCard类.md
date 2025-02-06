@@ -2,7 +2,7 @@
 
 [toc]
 
-2025/01/28
+2025/02/07
 
 ## 简介
 
@@ -18,7 +18,7 @@
 
 成员函数：
 
-```void WordCard::setWord(const Word &_word_)```：设定单词
+```void WordCard::setWord(const Word &_word_)```：设定单词，并将单词信息显示出来，即合并了`showWord()`的功能，暂时保留`showWord()`直至清除其它调用`showWord()`的地方
 
 ```void WordCard::showWord()```：将单词显示在相应位置，并显示释义
 

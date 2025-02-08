@@ -36,6 +36,9 @@ private:
     int TopMargin_,WordCardHeight_,VerticalSpacing_,HorizontalMargin_;//单词卡片的上边距，高度，垂直间距，侧边距
     QVector<Word> WordList_;//单词列表
     QVector<WordCard*> WordCardList_;//单词卡片列表
+
+signals:
+    void deleteWord(Word _Word_);
 };
 
 #endif // WORDLISTWIDGET_H

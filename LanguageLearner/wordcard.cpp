@@ -9,6 +9,7 @@ WordCard::WordCard(QWidget *parent) :
 
     connect(ui->DeleteButton_,&QPushButton::clicked,[=](){
         emit deleted();
+        emit deleteWord();
     });
 }
 

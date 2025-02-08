@@ -20,6 +20,9 @@ WordListWidget::WordListWidget(QWidget *parent,
 
 WordListWidget::~WordListWidget()
 {
+    for(int i=0;i<WordCardList_.size();i++){
+        delete WordCardList_[i];
+    }
     delete ui;
 }
 
@@ -27,6 +30,10 @@ void WordListWidget::setWordList(QVector<Word> _WordList_){
     WordList_=_WordList_;//保存单词列表
     for(int i=0;i<WordList_.size();i++){
         WordCardList_.append(new WordCard(ui->Contents_));
+        //连接信号
+        connect(WordCardList_[i],&WordCard::deleteWord,[=](){
+            emit deleteWord(WordList_[i]);
+        });
         //设置单词卡片位置及尺寸
         WordCardList_[i]->resize(ui->Contents_->width()-2*HorizontalMargin_,WordCardHeight_);
         WordCardList_[i]->move(HorizontalMargin_,TopMargin_+i*(WordCardHeight_+VerticalSpacing_));

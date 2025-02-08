@@ -1,4 +1,4 @@
-# WordCardList类
+# WordListWidget类
 
 [toc]
 
@@ -16,9 +16,28 @@
 
 成员函数：
 
-`void setWordList(QVector<Word> _WordList_);`设置单词列表，并自动生成单词卡片排列好展示出来
+`void setWordList(QVector<Word> _WordList_)`设置单词列表，并自动生成单词卡片排列好展示出来
 
-`void resizeEvent(QResizeEvent *event);`窗口大小变化事件重载，用于手动控制内部单词卡片布局
+`void resizeEvent(QResizeEvent *event)`窗口大小变化事件重载，用于手动控制内部单词卡片布局
+
+成员变量：
+
+`int TopMargin_`单词卡片顶部边距
+
+`int WordCardHeight_`单词卡片高度
+
+`int VerticalSpacing_`单词卡片垂直间距
+
+`int HorizontalMargin_`单词卡片侧边距
+
+`QVector<Word> WordList_`单词列表
+
+`QVector<WordCard*> WordCardList_`单词卡片列表
+
+信号：
+
+`void deleteWord(Word _Word_)`当该页面的某个单词卡进行删除操作，发送删除信号`deleteWord()`时，该删除信号发送，并指明哪个单词
+
 
 ## 具体实现
 

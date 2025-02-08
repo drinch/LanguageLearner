@@ -30,6 +30,7 @@ private:
 signals:
     void clicked();
     void deleted();
+    void deleteWord();
 };
 
 #endif // WORDCARD_H

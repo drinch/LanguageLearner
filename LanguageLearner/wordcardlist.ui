@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>SearchingResult</class>
- <widget class="QWidget" name="SearchingResult">
+ <class>WordCardList</class>
+ <widget class="QWidget" name="WordCardList">
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>315</width>
-    <height>252</height>
+    <width>400</width>
+    <height>300</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -15,17 +15,17 @@
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
-    <widget class="QScrollArea" name="scrollArea_">
+    <widget class="QScrollArea" name="ScrollArea_">
      <property name="widgetResizable">
       <bool>true</bool>
      </property>
-     <widget class="QWidget" name="scrollAreaWidget_">
+     <widget class="QWidget" name="Contents_">
       <property name="geometry">
        <rect>
         <x>0</x>
         <y>0</y>
-        <width>295</width>
-        <height>232</height>
+        <width>376</width>
+        <height>276</height>
        </rect>
       </property>
      </widget>

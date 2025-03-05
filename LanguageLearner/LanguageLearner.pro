@@ -14,34 +14,31 @@ SOURCES += \
     interface.cpp \
     main.cpp \
     mainwidget.cpp \
-    searchingresult.cpp \
     searchingwidget.cpp \
     word.cpp \
     wordcard.cpp \
-    wordlist.cpp \
-    wordlistwidget.cpp
+    wordcardlist.cpp \
+    wordlist.cpp
 
 HEADERS += \
     displaywidget.h \
     examinewidget.h \
     interface.h \
     mainwidget.h \
-    searchingresult.h \
     searchingwidget.h \
     word.h \
     wordcard.h \
-    wordlist.h \
-    wordlistwidget.h
+    wordcardlist.h \
+    wordlist.h
 
 FORMS += \
     displaywidget.ui \
     examinewidget.ui \
     interface.ui \
     mainwidget.ui \
-    searchingresult.ui \
     searchingwidget.ui \
     wordcard.ui \
-    wordlistwidget.ui
+    wordcardlist.ui
 
 TRANSLATIONS += \
     LanguageLearner_zh_CN.ts

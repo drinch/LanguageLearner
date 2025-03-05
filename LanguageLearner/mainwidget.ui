@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>287</width>
-    <height>236</height>
+    <width>648</width>
+    <height>455</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -32,7 +32,7 @@
    <item>
     <widget class="QStackedWidget" name="MainStackedWidget_">
      <property name="currentIndex">
-      <number>2</number>
+      <number>0</number>
      </property>
      <widget class="QWidget" name="Page1_">
       <layout class="QVBoxLayout" name="verticalLayout_2">
@@ -133,7 +133,7 @@
             <number>0</number>
            </property>
            <item>
-            <widget class="SearchingResult" name="SearchingResult_" native="true"/>
+            <widget class="WordCardList" name="SearchResults_" native="true"/>
            </item>
           </layout>
          </widget>
@@ -193,31 +193,31 @@
   <customwidget>
    <class>Interface</class>
    <extends>QWidget</extends>
-   <header>interface.h</header>
+   <header location="global">interface.h</header>
    <container>1</container>
   </customwidget>
   <customwidget>
    <class>SearchingWidget</class>
    <extends>QWidget</extends>
-   <header>searchingwidget.h</header>
+   <header location="global">searchingwidget.h</header>
    <container>1</container>
   </customwidget>
   <customwidget>
    <class>DisplayWidget</class>
    <extends>QWidget</extends>
-   <header>displaywidget.h</header>
+   <header location="global">displaywidget.h</header>
    <container>1</container>
   </customwidget>
   <customwidget>
    <class>ExamineWidget</class>
    <extends>QWidget</extends>
-   <header>examinewidget.h</header>
+   <header location="global">examinewidget.h</header>
    <container>1</container>
   </customwidget>
   <customwidget>
-   <class>SearchingResult</class>
+   <class>WordCardList</class>
    <extends>QWidget</extends>
-   <header>searchingresult.h</header>
+   <header location="global">wordcardlist.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>

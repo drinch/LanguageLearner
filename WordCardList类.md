@@ -1,8 +1,8 @@
-# WordListWidget类
+# WordCardList类
 
 [toc]
 
-2025/02/07
+2025/03/06
 
 ## 简介
 
@@ -17,6 +17,8 @@
 成员函数：
 
 `void setWordList(QVector<Word> _WordList_)`设置单词列表，并自动生成单词卡片排列好展示出来
+
+`void clear()`清空单词列表，为设置新的单词列表作准备
 
 `void resizeEvent(QResizeEvent *event)`窗口大小变化事件重载，用于手动控制内部单词卡片布局
 

@@ -1,13 +1,13 @@
-#include "wordlistwidget.h"
-#include "ui_wordlistwidget.h"
+#include "wordcardlist.h"
+#include "ui_wordcardlist.h"
 
-WordListWidget::WordListWidget(QWidget *parent,
-                               int _TopMargin_,
-                               int _WordCardHeight_,
-                               int _VerticalSpacing_,
-                               int _HorizontalMargin_) :
+WordCardList::WordCardList(QWidget *parent,
+                           int _TopMargin_,
+                           int _WordCardHeight_,
+                           int _VerticalSpacing_,
+                           int _HorizontalMargin_) :
     QWidget(parent),
-    ui(new Ui::WordListWidget),
+    ui(new Ui::WordCardList),
     TopMargin_(_TopMargin_),
     WordCardHeight_(_WordCardHeight_),
     VerticalSpacing_(_VerticalSpacing_),
@@ -18,7 +18,7 @@ WordListWidget::WordListWidget(QWidget *parent,
     ui->setupUi(this);
 }
 
-WordListWidget::~WordListWidget()
+WordCardList::~WordCardList()
 {
     for(int i=0;i<WordCardList_.size();i++){
         delete WordCardList_[i];
@@ -26,7 +26,7 @@ WordListWidget::~WordListWidget()
     delete ui;
 }
 
-void WordListWidget::setWordList(QVector<Word> _WordList_){
+void WordCardList::setWordList(QVector<Word> _WordList_){
     WordList_=_WordList_;//保存单词列表
     for(int i=0;i<WordList_.size();i++){
         WordCardList_.append(new WordCard(ui->Contents_));
@@ -42,9 +42,16 @@ void WordListWidget::setWordList(QVector<Word> _WordList_){
         WordCardList_[i]->show();
     }
 }
+void WordCardList::clear(){
+    for(int i=0;i<WordCardList_.size();i++){
+        delete WordCardList_[i];
+    }
+    WordCardList_.clear();
+    WordList_.clear();
+}
 
 //===================事件重载==========================
-void WordListWidget::resizeEvent(QResizeEvent *event){
+void WordCardList::resizeEvent(QResizeEvent *event){
     for(int i=0;i<WordCardList_.size();i++){
         auto _Card=WordCardList_[i];
         _Card->resize(ui->Contents_->width()-2*HorizontalMargin_,WordCardHeight_);

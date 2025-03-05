@@ -16,19 +16,20 @@ MainWidget::MainWidget(QWidget *parent)
     connect(ui->Interface_,&Interface::examine,[=](){mainSwitch(2);});
     connect(ui->ExamineWidget_,&ExamineWidget::end,[=](){mainSwitch(0);});
     connect(ui->SearchingWidget_,&SearchingWidget::search,[=](QString _str_){
-        ui->SearchingResult_->setWordList(wordlist_.searchWords(_str_));
+        ui->SearchResults_->setWordList(wordlist_.searchWords(_str_));//搜索字符串
         interfaceSwitch(_str_==""?0:1);
+        if(_str_=="") ui->SearchResults_->clear();
     });
-    connect(ui->SearchingResult_,&SearchingResult::check,[=](Word _word_){
+    /*connect(ui->SearchingResult_,&SearchingResult::check,[=](Word _word_){//点击修改单词
         ui->DisplayWidget_->setWord(_word_);
         ui->DisplayWidget_->setMode(0);
         mainSwitch(1);
         ui->SearchingWidget_->clear();
     });
-    connect(ui->SearchingResult_,&SearchingResult::deleted,[=](Word _word_){
+    connect(ui->SearchingResult_,&SearchingResult::deleted,[=](Word _word_){//删除单词
         wordlist_.deleteWord(_word_.word());
         ui->SearchingWidget_->searchAgain();
-    });
+    });*/
     connect(ui->DisplayWidget_,&DisplayWidget::back,[=](){mainSwitch(0);});
     connect(ui->SearchingWidget_,&SearchingWidget::addWord,
             [=](){

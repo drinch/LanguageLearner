@@ -15,7 +15,7 @@ public:
     ~WordList();
 
     QList<QString> getWords();
-    QList<Word> searchWords(QString _str_);
+    QVector<Word> searchWords(QString _str_);
 
     Word getWord(QString _str_);
     int getWeight(QString _str_);

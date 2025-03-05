@@ -35,8 +35,8 @@ WordList::~WordList(){
 QList<QString> WordList::getWords(){
     return map_.keys();
 }
-QList<Word> WordList::searchWords(QString _str_){
-    QList<Word> words;
+QVector<Word> WordList::searchWords(QString _str_){
+    QVector<Word> words;
     for(auto it=map_.lowerBound(_str_);it!=map_.end();it++){
         if(it.key().left(_str_.size())!=_str_) break;
         words.push_back(*it.value().first);

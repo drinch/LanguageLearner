@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>504</width>
-    <height>300</height>
+    <width>656</width>
+    <height>173</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -30,7 +30,7 @@
     <number>0</number>
    </property>
    <item>
-    <widget class="QWidget" name="InfoWidget_" native="true">
+    <widget class="QWidget" name="infoWidget_" native="true">
      <property name="sizePolicy">
       <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
        <horstretch>0</horstretch>
@@ -60,7 +60,7 @@
        <number>0</number>
       </property>
       <item>
-       <widget class="QWidget" name="Title_" native="true">
+       <widget class="QWidget" name="title_" native="true">
         <property name="sizePolicy">
          <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
           <horstretch>0</horstretch>
@@ -90,7 +90,7 @@
           <number>0</number>
          </property>
          <item>
-          <widget class="QLabel" name="Word_">
+          <widget class="QLabel" name="word_">
            <property name="minimumSize">
             <size>
              <width>0</width>
@@ -109,7 +109,7 @@
        </widget>
       </item>
       <item>
-       <widget class="QWidget" name="Context_" native="true">
+       <widget class="QWidget" name="content_" native="true">
         <property name="sizePolicy">
          <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
           <horstretch>0</horstretch>
@@ -133,7 +133,7 @@
           <number>0</number>
          </property>
          <item>
-          <widget class="QLabel" name="Property_">
+          <widget class="QLabel" name="property_">
            <property name="frameShape">
             <enum>QFrame::NoFrame</enum>
            </property>
@@ -143,7 +143,7 @@
           </widget>
          </item>
          <item>
-          <widget class="QLabel" name="Meaning_">
+          <widget class="QLabel" name="meaning_">
            <property name="frameShape">
             <enum>QFrame::NoFrame</enum>
            </property>
@@ -159,7 +159,7 @@
     </widget>
    </item>
    <item>
-    <widget class="QWidget" name="OptWidget_" native="true">
+    <widget class="QWidget" name="optWidget_" native="true">
      <layout class="QVBoxLayout" name="verticalLayout_2">
       <property name="spacing">
        <number>0</number>
@@ -177,7 +177,7 @@
        <number>0</number>
       </property>
       <item>
-       <widget class="QPushButton" name="DeleteButton_">
+       <widget class="QPushButton" name="deleteButton_">
         <property name="text">
          <string>PushButton</string>
         </property>

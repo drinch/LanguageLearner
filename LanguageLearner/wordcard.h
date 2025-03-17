@@ -14,13 +14,13 @@ class WordCard : public QWidget
     Q_OBJECT
 
 public:
-    explicit WordCard(QWidget *parent = nullptr);
+    explicit WordCard(QWidget *_parent_=nullptr);
     ~WordCard();
 
     void setWord(const Word &_word_);
     void showWord();
 
-    void mouseReleaseEvent(QMouseEvent *event);
+    void mouseReleaseEvent(QMouseEvent *_event_);
 
 private:
     Ui::WordCard *ui;

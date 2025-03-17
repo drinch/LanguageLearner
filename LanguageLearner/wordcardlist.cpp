@@ -2,59 +2,60 @@
 #include "ui_wordcardlist.h"
 
 WordCardList::WordCardList(QWidget *parent,
-                           int _TopMargin_,
-                           int _WordCardHeight_,
-                           int _VerticalSpacing_,
-                           int _HorizontalMargin_) :
+                           int _topMargin_,
+                           int _wordCardHeight_,
+                           int _verticalSpacing_,
+                           int _horizontalMargin_) :
     QWidget(parent),
     ui(new Ui::WordCardList),
-    TopMargin_(_TopMargin_),
-    WordCardHeight_(_WordCardHeight_),
-    VerticalSpacing_(_VerticalSpacing_),
-    HorizontalMargin_(_HorizontalMargin_),
-    WordList_(),
-    WordCardList_()
+    topMargin_(_topMargin_),
+    wordCardHeight_(_wordCardHeight_),
+    verticalSpacing_(_verticalSpacing_),
+    horizontalMargin_(_horizontalMargin_),
+    wordList_(),
+    wordCardList_()
 {
     ui->setupUi(this);
 }
 
 WordCardList::~WordCardList()
 {
-    for(int i=0;i<WordCardList_.size();i++){
-        delete WordCardList_[i];
+    for(int i=0;i<wordCardList_.size();i++){
+        delete wordCardList_[i];
     }
     delete ui;
 }
 
-void WordCardList::setWordList(QVector<Word> _WordList_){
-    WordList_=_WordList_;//保存单词列表
-    for(int i=0;i<WordList_.size();i++){
-        WordCardList_.append(new WordCard(ui->Contents_));
+void WordCardList::setWordList(QVector<Word> _wordList_){
+    clear();
+    wordList_=_wordList_;//保存单词列表
+    for(int i=0;i<wordList_.size();i++){
+        wordCardList_.append(new WordCard(ui->contents_));
         //连接信号
-        connect(WordCardList_[i],&WordCard::deleteWord,[=](){
-            emit deleteWord(WordList_[i]);
+        connect(wordCardList_[i],&WordCard::deleteWord,[=](){
+            emit deleteWord(wordList_[i]);
         });
         //设置单词卡片位置及尺寸
-        WordCardList_[i]->resize(ui->Contents_->width()-2*HorizontalMargin_,WordCardHeight_);
-        WordCardList_[i]->move(HorizontalMargin_,TopMargin_+i*(WordCardHeight_+VerticalSpacing_));
+        wordCardList_[i]->resize(ui->contents_->width()-2*horizontalMargin_,wordCardHeight_);
+        wordCardList_[i]->move(horizontalMargin_,topMargin_+i*(wordCardHeight_+verticalSpacing_));
         //设置单词卡片内容
-        WordCardList_[i]->setWord(WordList_[i]);
-        WordCardList_[i]->show();
+        wordCardList_[i]->setWord(wordList_[i]);
+        wordCardList_[i]->show();
     }
 }
 void WordCardList::clear(){
-    for(int i=0;i<WordCardList_.size();i++){
-        delete WordCardList_[i];
+    for(int i=0;i<wordCardList_.size();i++){
+        delete wordCardList_[i];
     }
-    WordCardList_.clear();
-    WordList_.clear();
+    wordCardList_.clear();
+    wordList_.clear();
 }
 
 //===================事件重载==========================
 void WordCardList::resizeEvent(QResizeEvent *event){
-    for(int i=0;i<WordCardList_.size();i++){
-        auto _Card=WordCardList_[i];
-        _Card->resize(ui->Contents_->width()-2*HorizontalMargin_,WordCardHeight_);
+    for(int i=0;i<wordCardList_.size();i++){
+        auto _Card=wordCardList_[i];
+        _Card->resize(ui->contents_->width()-2*horizontalMargin_,wordCardHeight_);
     }
     return QWidget::resizeEvent(event);
 }

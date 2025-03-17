@@ -1,13 +1,13 @@
 #include "wordcard.h"
 #include "ui_wordcard.h"
 
-WordCard::WordCard(QWidget *parent) :
-    QWidget(parent),
+WordCard::WordCard(QWidget *_parent_) :
+    QWidget(_parent_),
     ui(new Ui::WordCard)
 {
     ui->setupUi(this);
 
-    connect(ui->DeleteButton_,&QPushButton::clicked,[=](){
+    connect(ui->deleteButton_,&QPushButton::clicked,[=](){
         emit deleted();
         emit deleteWord();
     });
@@ -20,27 +20,27 @@ WordCard::~WordCard()
 
 void WordCard::setWord(const Word &_word_){
     word_=_word_;
-    ui->Word_->setText(word_.word());
+    ui->word_->setText(word_.word());
     if(word_.countProperty("释义")){
-        ui->Property_->setText("释义");
-        ui->Meaning_->setText(word_.property("释义"));
+        ui->property_->setText("释义");
+        ui->meaning_->setText(word_.property("释义"));
     }else{
-        ui->Property_->setText("");
-        ui->Meaning_->setText("");
+        ui->property_->setText("");
+        ui->meaning_->setText("");
     }
 }
 void WordCard::showWord(){
-    ui->Word_->setText(word_.word());
+    ui->word_->setText(word_.word());
     if(word_.countProperty("释义")){
-        ui->Property_->setText("释义");
-        ui->Meaning_->setText(word_.property("释义"));
+        ui->property_->setText("释义");
+        ui->meaning_->setText(word_.property("释义"));
     }else{
-        ui->Property_->setText("");
-        ui->Meaning_->setText("");
+        ui->property_->setText("");
+        ui->meaning_->setText("");
     }
 }
 
-void WordCard::mouseReleaseEvent(QMouseEvent *event){
+void WordCard::mouseReleaseEvent(QMouseEvent *_event_){
     emit clicked();
-    return QWidget::mouseReleaseEvent(event);
+    return QWidget::mouseReleaseEvent(_event_);
 }

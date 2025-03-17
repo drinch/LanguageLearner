@@ -16,25 +16,25 @@
 
 成员函数：
 
-`void setWordList(QVector<Word> _WordList_)`设置单词列表，并自动生成单词卡片排列好展示出来
+`void setWordList(QVector<Word> _wordList_)`设置单词列表，并自动生成单词卡片排列好展示出来
 
 `void clear()`清空单词列表，为设置新的单词列表作准备
 
-`void resizeEvent(QResizeEvent *event)`窗口大小变化事件重载，用于手动控制内部单词卡片布局
+`void resizeEvent(QResizeEvent *_event_)`窗口大小变化事件重载，用于手动控制内部单词卡片布局
 
 成员变量：
 
-`int TopMargin_`单词卡片顶部边距
+`int topMargin_`单词卡片顶部边距
 
-`int WordCardHeight_`单词卡片高度
+`int wordCardHeight_`单词卡片高度
 
-`int VerticalSpacing_`单词卡片垂直间距
+`int verticalSpacing_`单词卡片垂直间距
 
-`int HorizontalMargin_`单词卡片侧边距
+`int horizontalMargin_`单词卡片侧边距
 
-`QVector<Word> WordList_`单词列表
+`QVector<Word> wordList_`单词列表
 
-`QVector<WordCard*> WordCardList_`单词卡片列表
+`QVector<WordCard*> wordCardList_`单词卡片列表
 
 信号：
 

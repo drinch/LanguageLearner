@@ -22,7 +22,7 @@
 
 ```void WordCard::showWord()```：将单词显示在相应位置，并显示释义
 
-```void mouseReleaseEvent(QMouseEvent *event)```：重载点击事件，发送点击信号。
+```void mouseReleaseEvent(QMouseEvent *_event_)```：重载点击事件，发送点击信号。
 
 信号：
 

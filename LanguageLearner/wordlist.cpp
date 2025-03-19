@@ -5,6 +5,7 @@
 
 #include<QDebug>
 
+//================构造和析构函数===============
 WordList::WordList(){
     QFile _file("data.txt");
     _file.open(QIODevice::ReadOnly);
@@ -33,61 +34,46 @@ WordList::~WordList(){
     _file.close();
 }
 
-QList<QString> WordList::getWords(){
-    return map_.keys();
+//=======================单词列表查询=====================
+int WordList::countWord(QString _word_){//根据单词名检查单词是否存在
+    return map_.count(_word_);
 }
-QVector<Word> WordList::searchWords(QString _str_){
+Word WordList::getWord(QString _word_){//根据单词名获取单词信息
+    if(!map_.count(_word_)) return Word();
+    return map_[_word_].first;
+}
+int WordList::getWeight(QString _word_){//根据单词名获取单词权重
+    if(!map_.count(_word_)) return -1;
+    return map_[_word_].second;
+}
+QVector<Word> WordList::searchWords(QString _str_){//根据字符串搜索单词
     QVector<Word> _words;
     for(auto _it=map_.begin();_it!=map_.end();_it++){//遍历词库
-        qDebug()<<"Searching... "<<_it.key()<<" "<<_str_<<" "<<_it.key().indexOf(_str_);
         if(_it.key().indexOf(_str_)!=-1){//匹配片段
             _words.push_back(_it.value().first);
         }
     }
     return _words;
 }
-
-Word WordList::getWord(QString _str_){//根据单词名获取单词所有信息
-    if(!map_.count(_str_)) return Word();
-    return map_[_str_].first;
-}
-int WordList::getWeight(QString _str_){//根据单词名获取单词相关权重
-    if(!map_.count(_str_)) return -1;
-    return map_[_str_].second;
+QList<QString> WordList::getAllWords(){//获取所有单词
+    return map_.keys();
 }
 
+//=============================单词列表操作====================================
 void WordList::addWord(QString _word_,Word _wordInfo_,int _weight_){//添加单词
-    if(_word_!=_wordInfo_.word()) return;
+    if(_word_!=_wordInfo_.word()||countWord(_word_)) return;
     map_.insert(_word_,QPair<Word,int>(_wordInfo_,_weight_));
 }
-void WordList::editWord(QString _word_,Word _wordInfo_){//编辑单词
+void WordList::addWord(Word _wordInfo_,int _weight_){
+    map_.insert(_wordInfo_.word(),QPair<Word,int>(_wordInfo_,_weight_));
+}
+void WordList::editWord(QString _word_,Word _wordInfo_){//修改单词
+    if(!countWord(_word_)||countWord(_wordInfo_.word())) return;
     if(_word_!=_wordInfo_.word()){
-        QString _word=_wordInfo_.word();
-        map_.insert(_word,QPair<Word,int>(_wordInfo_,map_[_word_].second));
+        map_.insert(_wordInfo_.word(),QPair<Word,int>(_wordInfo_,map_[_word_].second));
         map_.remove(_word_);
     }else map_[_word_].first=_wordInfo_;
 }
 int WordList::deleteWord(QString _word_){//删除单词
     return map_.remove(_word_);
-}
-int WordList::countWord(QString _word_){//检查单词是否存在
-    return map_.count(_word_);
-}
-
-QVector<Word> WordList::getTestWords(int _n_){
-    QVector<QString> vector=map_.keys().toVector();
-    std::sort(vector.begin(),vector.end(),[this](const QString &_wordA_,const QString &_wordB_){
-        return this->map_[_wordA_].second<this->map_[_wordB_].second;
-    });
-    QVector<Word> wordlist;
-    for(int i=vector.size()-_n_;i<vector.size();i++){
-        wordlist.append(map_[vector[i]].first);
-    }
-    return wordlist;
-}
-
-void WordList::debug_ShowWord(){
-    for(auto word:map_){
-        qDebug()<<word.first.word();
-    }
 }

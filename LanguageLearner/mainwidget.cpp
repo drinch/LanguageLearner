@@ -43,8 +43,6 @@ MainWidget::MainWidget(QWidget *parent)
         if(!wordlist_.countWord(_str_))
             wordlist_.addWord(word.word(),word);
         else wordlist_.editWord(_str_,word);
-        qDebug()<<"====wordlist====";
-        wordlist_.debug_ShowWord();
     });
 }
 

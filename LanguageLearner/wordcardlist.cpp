@@ -26,7 +26,7 @@ WordCardList::~WordCardList()
     delete ui;
 }
 
-void WordCardList::setWordList(QVector<Word> _wordList_){
+void WordCardList::setWordList(QVector<Word> _wordList_){//设置待显示的单词列表
     clear();
     wordList_=_wordList_;//保存单词列表
     for(int i=0;i<wordList_.size();i++){
@@ -53,6 +53,13 @@ void WordCardList::clear(){
 
 //===================事件重载==========================
 void WordCardList::resizeEvent(QResizeEvent *event){
+    //更新contents区域尺寸
+    QMargins _margins=ui->verticalLayout->contentsMargins();
+    ui->contents_->resize(
+        this->width()-(_margins.left()+_margins.right()),
+        this->height()-(_margins.top()+_margins.bottom())
+    );
+    //逐个更新单词卡片尺寸
     for(int i=0;i<wordCardList_.size();i++){
         auto _Card=wordCardList_[i];
         _Card->resize(ui->contents_->width()-2*horizontalMargin_,wordCardHeight_);

@@ -18,7 +18,7 @@ public:
     ~MainWidget();
 
 	void mainSwitch(int _index_);
-	void interfaceSwitch(int _index_);
+    void interfaceSwitch(int _index_);
 
 private:
     Ui::MainWidget *ui;
